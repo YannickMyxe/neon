@@ -1,67 +1,67 @@
 Named tokens: 
 [MODULE]
-[NAME] : compiler
+[NAME] : id_1
 [USE]
 [L_CURLY_BRACKET]
-[NAME] : print
+[NAME] : id_2
 [R_CURLY_BRACKET]
 [RABBIT]
-[NAME] : std
+[NAME] : id_3
 [FUNCTION]
 [MAIN]
 [L_ROUND_BRACKET]
 [R_ROUND_BRACKET]
 [GREATER_THEN]
-[NAME] : int
+[NAME] : id_4
 [L_CURLY_BRACKET]
 [LET]
-[NAME] : hello
+[NAME] : id_5
 [COLON]
-[NAME] : String
+[NAME] : id_6
 [EQUAL]
 [DOUBLE_QUOTE]
-[NAME] : Hello
-[NAME] : world
+[NAME] : id_7
+[NAME] : id_8
 [EXCLAMATION_MARK]
 [DOUBLE_QUOTE]
-[NAME] : std
+[NAME] : id_2
 [DOUBLE_COLON]
-[NAME] : print
+[NAME] : id_1
 [L_ROUND_BRACKET]
-[NAME] : hello
+[NAME] : id_4
 [R_ROUND_BRACKET]
 [LET]
-[NAME] : user
+[NAME] : id_9
 [EQUAL]
 [DOUBLE_QUOTE]
-[NAME] : Yannick
+[NAME] : id_10
 [DOUBLE_QUOTE]
 [LET]
-[NAME] : x
+[NAME] : id_11
 [EQUAL]
-[NUMBER] : 10
+[NUMBER] : id_12
 [LET]
-[NAME] : y
+[NAME] : id_13
 [EQUAL]
-[NAME] : x
+[NAME] : id_10
 [PLUS]
-[NUMBER] : 30
-[NAME] : x
+[NUMBER] : id_14
+[NAME] : id_10
 [PLUS_EQUALS]
-[NAME] : y
-[NAME] : std
+[NAME] : id_12
+[NAME] : id_2
 [DOUBLE_COLON]
-[NAME] : print
+[NAME] : id_1
 [L_ROUND_BRACKET]
 [DOUBLE_QUOTE]
-[NAME] : x
+[NAME] : id_10
 [DOUBLE_EQUALS]
 [L_CURLY_BRACKET]
 [R_CURLY_BRACKET]
 [DOUBLE_QUOTE]
 [COMMA]
-[NAME] : x
+[NAME] : id_10
 [R_ROUND_BRACKET]
 [RETURN]
-[NUMBER] : 0
+[NUMBER] : id_15
 [R_CURLY_BRACKET]

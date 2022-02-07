@@ -1,3 +1,5 @@
+package tokens
+
 import java.util.*
 
 class TokenMap {

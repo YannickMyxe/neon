@@ -1,3 +1,6 @@
+package tokens
+
+import FileManager
 import java.util.*
 
 class Tokenizer {
@@ -5,19 +8,23 @@ class Tokenizer {
     private val tokenFile: FileManager
     private val namedTokensFile: FileManager
 
-    private val tokens: Vector<String> = Vector()
+    private val tokensList: Vector<String> = Vector()
     private val tokenMap: TokenMap = TokenMap()
+
+    private val idList: Identifier
 
     constructor(filename: String) {
         file = FileManager(filename)
-        tokenFile = FileManager(file.getFileName()+".tokens")
+        tokenFile = FileManager(file.getFileName() + ".tokens")
         namedTokensFile = FileManager(file.getFileName() + ".named")
+        idList = Identifier(file.getFileName()+".id")
     }
 
-    constructor(filename: String, tokenFile: String, namedTokensFile: String) {
+    constructor(filename: String, tokenFile: String, namedTokensFile: String, identifiersFile: String) {
         this.file = FileManager(filename)
         this.tokenFile = FileManager(tokenFile)
         this.namedTokensFile = FileManager(namedTokensFile)
+        this.idList = Identifier(identifiersFile)
     }
 
     fun initialize(): Boolean {
@@ -48,29 +55,29 @@ class Tokenizer {
                 if (!isLetter(char) && !isNumber(char)) { // Chars to expand the text var
                     if (text != "") {
                         // add to the tokens list and clear the var
-                        tokens.add(text)
+                        tokensList.add(text)
                         text = ""
                     }
                     if (!char.isWhitespace()) {
-                        tokens.add(char.toString())
+                        tokensList.add(char.toString())
                     }
                 } else {
                     text += char
                 }
             }
             if (text != "") {
-                tokens.add(text)
+                tokensList.add(text)
             }
         }
         // Find double spots and put the index of the second token in the indices vector
         val indices: Vector<Int> = Vector()
-        for ((index, _) in tokens.withIndex()) {
-            if (index + 1 <= tokens.size) {
-                val char = tokens[index][0]
+        for ((index, _) in tokensList.withIndex()) {
+            if (index + 1 <= tokensList.size) {
+                val char = tokensList[index][0]
                 if (!isSpecialCharacter(char)) {
-                    val nextChar = tokens[index + 1][0]
+                    val nextChar = tokensList[index + 1][0]
                     if (!isSpecialCharacter(nextChar) && !isNumber(nextChar)) {
-                        tokens[index] += tokens[index + 1]
+                        tokensList[index] += tokensList[index + 1]
                         indices.add(index + 1 - indices.size)
                     }
                 }
@@ -79,23 +86,24 @@ class Tokenizer {
         // Remove the indexes collected in the vector
         for (item in indices) {
             // println("Removing index: $item :> " + tokens[item])
-            tokens.removeElementAt(item)
+            tokensList.removeElementAt(item)
         }
 
         // Write the tokens to a file
         tokenFile.getFile().writeText("Tokens: \n")
         // println("Tokens: ")
-        tokens.forEachIndexed { index, token ->
+        tokensList.forEachIndexed { index, token ->
             // println("$index => '$token'")
             tokenFile.getFile().appendText("$index : $token\n")
         }
 
         // # NAMED TOKENS
         // Add names to the tokens
-        for (item in tokens) {
+        for (item in tokensList) {
             val currentToken = checkToken(item)
             if (currentToken == Tokens.NAME || currentToken == Tokens.NUMBER) {
-                tokenMap.add(Token(currentToken, item))
+                val index = idList.add(item)
+                tokenMap.add(Token(currentToken, "id_$index"))
             } else {
                 tokenMap.add(Token(currentToken, null))
             }
@@ -112,6 +120,14 @@ class Tokenizer {
                 }
             }\n")
         }
+
+        val f = idList.getFile().getFile()
+        f.writeText("Identifiers: \n")
+        idList.getList().forEachIndexed {
+            index, item ->
+            f.appendText("$index : $item\n")
+        }
+
         return true
     }
 
@@ -150,7 +166,7 @@ class Tokenizer {
     }
 
     fun getTokens(): Vector<String> {
-        return tokens
+        return tokensList
     }
 
     private fun checkToken(string: String): Tokens {

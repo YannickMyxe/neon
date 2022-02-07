@@ -1,3 +1,5 @@
+package tokens
+
 class Token {
 
     private val id: Tokenizer.Tokens
