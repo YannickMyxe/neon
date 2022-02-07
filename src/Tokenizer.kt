@@ -10,19 +10,17 @@ class Tokenizer {
 
     constructor(filename: String) {
         file = FileManager(filename)
-        tokenFile = FileManager(file.getFileName()+".out.tokens")
+        tokenFile = FileManager(file.getFileName()+".tokens")
         namedTokensFile = FileManager(tokenFile.getFileName() + ".named")
-        initialize()
     }
 
     constructor(filename: String, tokenFile: String, namedTokensFile: String) {
         this.file = FileManager(filename)
         this.tokenFile = FileManager(tokenFile)
         this.namedTokensFile = FileManager(namedTokensFile)
-        initialize()
     }
 
-    private fun initialize() {
+    fun initialize(): Boolean {
         if (!file.canWrite()) {
             error("Cannot write to file: ${file.getFileName()}")
         }
@@ -107,6 +105,7 @@ class Tokenizer {
         namedTokens.forEach { token ->
             namedTokensFile.getFile().appendText("$token\n")
         }
+        return true
     }
 
 
