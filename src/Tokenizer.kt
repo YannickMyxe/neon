@@ -8,9 +8,9 @@ class Tokenizer {
     private val tokens: Vector<String> = Vector()
     private val namedTokens: Vector<String> = Vector()
 
-    constructor() {
-        file = FileManager("comp.neon")
-        tokenFile = FileManager("out.tokens")
+    constructor(filename: String) {
+        file = FileManager(filename)
+        tokenFile = FileManager(file.getFileName()+".out.tokens")
         namedTokensFile = FileManager(tokenFile.getFileName() + ".named")
         initialize()
     }
