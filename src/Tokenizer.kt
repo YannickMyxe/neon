@@ -6,12 +6,12 @@ class Tokenizer {
     private val namedTokensFile: FileManager
 
     private val tokens: Vector<String> = Vector()
-    private val namedTokens: Vector<String> = Vector()
+    private val tokenMap: TokenMap = TokenMap()
 
     constructor(filename: String) {
         file = FileManager(filename)
         tokenFile = FileManager(file.getFileName()+".tokens")
-        namedTokensFile = FileManager(tokenFile.getFileName() + ".named")
+        namedTokensFile = FileManager(file.getFileName() + ".named")
     }
 
     constructor(filename: String, tokenFile: String, namedTokensFile: String) {
@@ -21,6 +21,7 @@ class Tokenizer {
     }
 
     fun initialize(): Boolean {
+        // # FILE HANDLING
         if (!file.canWrite()) {
             error("Cannot write to file: ${file.getFileName()}")
         }
@@ -32,8 +33,8 @@ class Tokenizer {
         }
         println("File: ${file.getFileName()}")
 
-        //printFile(file)
 
+        // # READING FILE
         val data = file.getFile().readLines()
         data.forEach { line ->
             val i = line.indexOf("//")
@@ -81,17 +82,6 @@ class Tokenizer {
             tokens.removeElementAt(item)
         }
 
-        // Add names to the tokens
-        for (item in tokens) {
-            val currentToken = checkToken(item)
-
-            if (currentToken == Tokens.NAME || currentToken == Tokens.NUMBER) {
-                namedTokens.add("[${currentToken}] : $item")
-            } else {
-                namedTokens.add("[${currentToken}]")
-            }
-        }
-
         // Write the tokens to a file
         tokenFile.getFile().writeText("Tokens: \n")
         // println("Tokens: ")
@@ -100,10 +90,27 @@ class Tokenizer {
             tokenFile.getFile().appendText("$index : $token\n")
         }
 
+        // # NAMED TOKENS
+        // Add names to the tokens
+        for (item in tokens) {
+            val currentToken = checkToken(item)
+            if (currentToken == Tokens.NAME || currentToken == Tokens.NUMBER) {
+                tokenMap.add(Token(currentToken, item))
+            } else {
+                tokenMap.add(Token(currentToken, null))
+            }
+        }
+
         // Write the named tokens to a file
         namedTokensFile.getFile().writeText("Named tokens: \n")
-        namedTokens.forEach { token ->
-            namedTokensFile.getFile().appendText("$token\n")
+        tokenMap.getList().forEach { token ->
+            namedTokensFile.getFile().appendText("[${token.getId().name}]${
+                if(token.getData() == "null") {
+                    ""
+                } else {
+                    " : ${token.getData()}"
+                }
+            }\n")
         }
         return true
     }
