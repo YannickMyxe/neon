@@ -5,7 +5,8 @@ fun main() {
     val tokens = Tokenizer("comp.neon")
     //if(tokens.initialize()) println("Complete!")
 
-    val ex = Add(Subtract(Value(10), Value(3)), Value(5))
+    val ex = Add(Multiply(Value(2), Value(3)), Value(5))
+    println("Expression: ${evalToString(ex)}")
     println("Evaluation: ${evaluate(ex)}")
 
 }

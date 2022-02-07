@@ -5,11 +5,4 @@ class SyntaxTree {
         this.outFile = FileManager(filename)
     }
 
-    fun evaluate(ex: Expression) {
-        when(ex) {
-
-        }
-    }
-
-
 }
