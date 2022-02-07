@@ -1,0 +1,7 @@
+mod main
+use { print } :> std
+
+fn main() > int {
+    std::print("Hello world!")
+    ret 0
+}

@@ -1,0 +1,33 @@
+mod types
+
+fn main() {
+    let x: int = 5
+    let y = 10
+    let b: bool = true
+
+    let c: char = 'A'
+    let slice: char[] = "Hello"
+    let s: string = "Hello world!"
+}
+
+fn customTypes() {
+    deftype string: {
+        // Storage
+        char[] storage,
+        // Constructor
+        string(char[]), 
+        // Functions
+        fn length() > int
+        fn add(string) > self,
+        fn delLastChar() > self,
+    } 
+    define string.add(string text) {
+        storage << text
+        ret self
+    }
+    define string{
+        fn length{
+            ret storage.length;
+        },
+    }
+}

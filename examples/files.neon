@@ -1,0 +1,9 @@
+mod files 
+use { files, print } :> std
+
+fn main() {
+    let f: File = std::File.get("./foo.txt")
+    f.append("Hello this is a file!").nl()
+
+    std::print(f.toString())
+}

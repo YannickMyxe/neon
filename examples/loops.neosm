@@ -1,0 +1,8 @@
+
+main: 
+    loop looping, 3
+end
+
+looping:
+    inc x
+end

@@ -1,0 +1,7 @@
+
+function:
+    move value, target
+    copy value, target
+    goto function
+    return value
+end

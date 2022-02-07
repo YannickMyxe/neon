@@ -1,0 +1,18 @@
+mod functions
+
+fn main() {
+    let x = 3
+    ley y = 2 
+
+    let sum = add(x, y)
+    addToX(x, y)
+
+}
+
+fn add(int x, int y) > int {
+    ret x + y
+}
+
+fn addToX(int x, int y) :> x {
+    ret x + y
+}

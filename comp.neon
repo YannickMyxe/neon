@@ -1,0 +1,17 @@
+mod compiler
+use { print } :> std
+
+fn main() > int {
+    let hello: String = "Hello world!"
+    std::print(hello)
+
+    let user = "Yannick"
+    let x = 10
+    let y = x + 30
+
+    x += y
+
+    std::print("x == {}", x) 
+
+    ret 0
+}
