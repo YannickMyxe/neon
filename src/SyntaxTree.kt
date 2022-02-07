@@ -1,2 +1,3 @@
-class SynthaxTree {
+class SyntaxTree {
+
 }
