@@ -8,5 +8,18 @@ fun main() {
         if (tokens.initialize()) println("Complete!")
         else println("Failed!")
     }
-    println("[tokenizer] took [$tokenizerTime ms] to tokenize the file")
+    println("[tokenizer] took [${tokenizerTime} ms] to tokenize file '${tokens.getFileName()}'")
+
+    val expressionTimer = measureTimeMillis {
+        val e: Expression =
+            Expression.Binary.Add(
+                Expression.Literal.Value(2), Expression.Binary.Subtract(
+                    Expression.Literal.Value(5), Expression.Literal.Value(3)
+                )
+            )
+        println("Expression: ${evalToString(e)} = ${evaluate(e)}")
+    }
+    println("[Evaluation] : Evaluation time: [${expressionTimer} ms]")
+
+
 }
