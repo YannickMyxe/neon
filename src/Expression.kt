@@ -14,6 +14,8 @@ sealed class Expression {
     sealed class Unary(val left: Expression) : Expression() {
         class Negate(left: Expression) : Unary(left)
     }
+
+    sealed class Group(val left: Expression) : Expression()
 }
 
 
@@ -28,6 +30,7 @@ fun evaluate(ex: Expression): Int {
         is Expression.Binary.Multiply -> evaluate(ex.left) * evaluate(ex.right)
         // Unary
         is Expression.Unary.Negate -> -1 * evaluate(ex.left)
+        is Expression.Group -> evaluate(ex.left)
     }
 }
 
