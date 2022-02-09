@@ -11,8 +11,8 @@ sealed class Expression {
         class Divide(left: Expression, right: Expression) : Binary(left, right)
     }
 
-    sealed class Unary : Expression() {
-        class Negate(val left: Expression) : Unary()
+    sealed class Unary(val left: Expression) : Expression() {
+        class Negate(left: Expression) : Unary(left)
     }
 }
 
