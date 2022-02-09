@@ -27,6 +27,10 @@ class Tokenizer {
         this.idList = Identifier(identifiersFile)
     }
 
+    fun getFileName(): String {
+        return file.getFileName()
+    }
+
     fun initialize(): Boolean {
         // # FILE HANDLING
         if (!file.canWrite()) {
