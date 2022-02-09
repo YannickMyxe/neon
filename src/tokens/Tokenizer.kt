@@ -240,7 +240,7 @@ class Tokenizer {
 
                 else -> {
                     // NONE
-                    return Tokens.NONE
+                    return Tokens.NAME
                 }
             }
         }
