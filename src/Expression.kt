@@ -4,11 +4,11 @@ sealed class Expression {
         class Value(val v: Int) : Literal()
     }
 
-    sealed class Binary : Expression() {
-        class Add(val left: Expression, val right: Expression) : Binary()
-        class Subtract(val left: Expression, val right: Expression) : Binary()
-        class Multiply(val left: Expression, val right: Expression) : Binary()
-        class Divide(val left: Expression, val right: Expression) : Binary()
+    sealed class Binary(val left: Expression, val right: Expression) : Expression() {
+        class Add(left: Expression, right: Expression) : Binary(left, right)
+        class Subtract(left: Expression, right: Expression) : Binary(left, right)
+        class Multiply(left: Expression, right: Expression) : Binary(left, right)
+        class Divide(left: Expression, right: Expression) : Binary(left, right)
     }
 
     sealed class Unary : Expression() {
