@@ -5,6 +5,10 @@ fn main() {
     let y = 10
     let b: bool = true
 
+    // Variables are mutable unless specified
+    let mut m: int = 15
+    m = 5
+
     let c: char = 'A'
     let slice: char[] = "Hello"
     let s: string = "Hello world!"
