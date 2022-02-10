@@ -106,7 +106,7 @@ class Tokenizer {
         // Add names to the tokens
         for (item in tokensList) {
             val currentToken = checkToken(item)
-            if (currentToken == Tokens.NAME || currentToken == Tokens.NUMBER) {
+            if (currentToken == TokenType.NAME || currentToken == TokenType.NUMBER) {
                 val index = idList.add(item)
                 tokenMap.add(Token(currentToken, "id_$index"))
             } else {
@@ -173,119 +173,4 @@ class Tokenizer {
     fun getTokens(): Vector<String> {
         return tokensList
     }
-
-    private fun checkToken(string: String): Tokens {
-        if (isNumber(string[0])) {
-            return Tokens.NUMBER
-        } else {
-            return when (string) {
-                // Mathematical
-                "+" -> Tokens.PLUS
-                "-" -> Tokens.MINUS
-                "/" -> Tokens.DIVIDE
-                "*" -> Tokens.TIMES
-                "%" -> Tokens.MODULO
-
-                // Brackets
-                "{" -> Tokens.L_CURLY_BRACKET
-                "}" -> Tokens.R_CURLY_BRACKET
-                "[" -> Tokens.L_SQUARE_BRACKET
-                "]" -> Tokens.R_SQUARE_BRACKET
-                "(" -> Tokens.L_ROUND_BRACKET
-                ")" -> Tokens.R_ROUND_BRACKET
-
-                // Comparison
-                "<" -> Tokens.SMALLER_THEN
-                ">" -> Tokens.GREATER_THEN
-                "<=" -> Tokens.SMALLER_OR_EQUAL
-                ">=" -> Tokens.GREATER_OR_EQUAL
-                "=" -> Tokens.EQUAL
-
-                // Special Chars
-                "?" -> Tokens.QUESTION_MARK
-                "!" -> Tokens.EXCLAMATION_MARK
-                "," -> Tokens.COMMA
-                ":>" -> Tokens.RABBIT
-                ":" -> Tokens.COLON
-                "::" -> Tokens.DOUBLE_COLON
-
-                // Quotes
-                "\"" -> Tokens.DOUBLE_QUOTE
-                "'" -> Tokens.SINGLE_QUOTE
-                "`" -> Tokens.BACKTICK
-
-                // Logical
-                "true" -> Tokens.TRUE
-                "false" -> Tokens.FALSE
-                "AND", "&&"  -> Tokens.AND
-                "OR", "||" -> Tokens.OR
-                "XOR" -> Tokens.XOR
-                "NAND" -> Tokens.NAND
-                "NOT" -> Tokens.NOT
-                "NOR" -> Tokens.NOR
-                "==" -> Tokens.DOUBLE_EQUALS
-                "+=" -> Tokens.PLUS_EQUALS
-                "-=" -> Tokens.MINUS_EQUALS
-                "/=" -> Tokens.DIVIDE_EQUALS
-                "*=" -> Tokens.TIMES_EQUALS
-                "%=" -> Tokens.MODULO_EQUALS
-
-                // Keywords
-                "mod" -> Tokens.MODULE
-                "use" ->  Tokens.USE
-                "let" -> Tokens.LET
-                "main" -> Tokens.MAIN
-                "ret" -> Tokens.RETURN
-                "fn" -> Tokens.FUNCTION
-
-
-                else -> {
-                    // NONE
-                    return Tokens.NAME
-                }
-            }
-        }
-    }
-
-    enum class Tokens {
-
-        // None
-        NONE,
-
-        // Mathematical
-        PLUS, MINUS,
-        DIVIDE, TIMES, MODULO,
-
-        // Brackets
-        L_CURLY_BRACKET, R_CURLY_BRACKET,
-        L_SQUARE_BRACKET, R_SQUARE_BRACKET,
-        L_ROUND_BRACKET, R_ROUND_BRACKET,
-
-        // Special Chars
-        RABBIT, COLON, DOUBLE_COLON,
-        QUESTION_MARK, EXCLAMATION_MARK, COMMA,
-
-        // vars
-        NUMBER,
-
-        // Logical operators
-        TRUE, FALSE,
-        AND, OR, XOR, NAND, NOT, NOR,
-        GREATER_THEN, SMALLER_THEN,
-        GREATER_OR_EQUAL, SMALLER_OR_EQUAL,
-        DOUBLE_EQUALS,
-
-        // Assignment
-        EQUAL, PLUS_EQUALS, MINUS_EQUALS,
-        TIMES_EQUALS, DIVIDE_EQUALS,
-        MODULO_EQUALS,
-
-        // Quotes
-        DOUBLE_QUOTE, SINGLE_QUOTE, BACKTICK,
-
-        // Keywords
-        FUNCTION, RETURN, LET, MAIN,
-        NAME, MODULE, USE,
-    }
-
 }
