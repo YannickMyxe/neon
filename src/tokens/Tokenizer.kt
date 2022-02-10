@@ -1,6 +1,7 @@
 package tokens
 
 import FileManager
+import java.lang.Character.isDigit
 import java.util.*
 
 class Tokenizer {
@@ -150,7 +151,7 @@ class Tokenizer {
     }
 
     private fun isNumber(c: Char): Boolean {
-        return (c in '0'..'9')
+        return isDigit(c) // (c in '0'..'9')
     }
 
     private fun isBracket(char: Char): Boolean {
